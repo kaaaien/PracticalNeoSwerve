@@ -8,7 +8,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
-import com.ctre.phoenix.sensors.PigeonIMU;
+import com.studica.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
@@ -28,7 +28,7 @@ public class Swerve extends SubsystemBase {
 
     public SwerveDriveOdometry swerveOdometry;
     public SwerveMod[] mSwerveMods;
-    public PigeonIMU gyro;
+    public AHRS gyro;
     public RobotConfig config;
     private Field2d field = new Field2d();
 
@@ -41,9 +41,8 @@ public class Swerve extends SubsystemBase {
           Constants.AutoConstants.moduleConfig,
           Constants.Swerve.trackWidth);
 
-        gyro = new PigeonIMU(Constants.Swerve.pigeonID);
-        gyro.configFactoryDefault();
-        gyro.setYaw(0);
+        gyro = new AHRS(AHRS.NavXComType.kMXP_SPI);
+        gyro.reset();
 
         mSwerveMods = new SwerveMod[] {
             new SwerveMod(0, Constants.Swerve.Mod0.constants),

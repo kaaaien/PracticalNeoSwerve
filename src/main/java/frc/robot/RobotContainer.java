@@ -28,9 +28,9 @@ public class RobotContainer {
     private final Joystick driver = new Joystick(0);
 
    /* Driver Controls */
-	private final int translationAxis = 1;
-	private final int strafeAxis = 0;
-	private final int rotationAxis = 2;
+	private final int translationAxis = XboxController.Axis.kLeftY.value;
+	private final int strafeAxis = XboxController.Axis.kLeftX.value;
+	private final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
@@ -40,8 +40,8 @@ public class RobotContainer {
 
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kX.value);
 
-    private final Trigger forwardHold = new Trigger(() -> (driver.getRawAxis(4) > 0.75));
-    private final Trigger backwardHold = new Trigger(() -> (driver.getRawAxis(4) < -0.75));
+    private final Trigger forwardHold = new Trigger(() -> (driver.getRawAxis(translationAxis) > 0.75));
+    private final Trigger backwardHold = new Trigger(() -> (driver.getRawAxis(translationAxis) < -0.75));
 
     /* Subsystems */
     private final PoseEstimator s_PoseEstimator = new PoseEstimator();
